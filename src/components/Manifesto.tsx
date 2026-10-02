@@ -16,7 +16,9 @@ export default function Manifesto() {
     () => {
       const mm = gsap.matchMedia(root);
 
-      mm.add(MOTION_OK, () => {
+      // Só no mobile: no desktop o texto vem logo após os selos E-G-O e
+      // duas animações de scroll seguidas pesam, então ele fica estático.
+      mm.add(`${MOTION_OK} and (max-width: 899px)`, () => {
         const words = gsap.utils.toArray<HTMLElement>(".mani-w");
         const step = 0.1;
         const at = (selector: string) =>
